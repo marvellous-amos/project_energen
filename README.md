@@ -314,17 +314,13 @@ Potential extensions include:
 
 ### Tech Stack
 
-- pandas / numpy — data manipulation
-
-- statsmodels — SARIMA modeling
-
-- matplotlib — visualization
-
-- Flask — local inference API
-
-- Docker — environment reproducibility
-
-- Python — core language
+- **pandas / numpy**: data manipulation
+- **statsmodels**: SARIMA modeling
+- **matplotlib**: visualization
+- **Flask**: local inference API
+- **Docker**: environment reproducibility
+- **waitress**: Production-ready WSGI server
+- **Python**: core language
 
 ### Best practices applied throughout the project:
 
