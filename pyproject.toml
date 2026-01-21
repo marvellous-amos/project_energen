@@ -1,0 +1,25 @@
+[project]
+name = "project-energen"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Marvellous Amos",email = "amosmarvellous48@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "flask (>=3.1.2,<4.0.0)",
+    "pandas (>=2.3.3,<3.0.0)",
+    "numpy (>=2.4.1,<3.0.0)",
+    "pmdarima (>=2.1.1,<3.0.0)",
+    "scikit-learn (>=1.8.0,<2.0.0)",
+    "statsmodels (>=0.14.6,<0.15.0)",
+    "waitress (>=3.0.2,<4.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "project_energen", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

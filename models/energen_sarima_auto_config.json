@@ -1,0 +1,17 @@
+{
+    "order": [
+        0,
+        1,
+        2
+    ],
+    "seasonal_order": [
+        2,
+        0,
+        2,
+        24
+    ],
+    "m": 24,
+    "scaler": "MinMaxScaler",
+    "train_Start": "2014-11-01 00:00:00",
+    "train_end": "2014-12-29 23:00:00"
+}
