@@ -1,12 +1,10 @@
-# Energy Load Forecasting System (Local)
+# Energy Load Forecasting System
 
 ## Project Overview
 
 This project implements a **classical time-series forecasting system** for predicting future electrical energy load using historical consumption data. It demonstrates an end-to-end workflow for **offline energy demand forecasting**, covering data preprocessing, exploratory analysis, model training, evaluation, and local forecasting.
 
 Although the system can be run inside a Docker container, it is **not deployed to a cloud platform** and does not rely on managed services. Docker is used strictly for **environment reproducibility and local execution**.
-
----
 
 ## The Problem
 
@@ -63,7 +61,7 @@ This system is suitable for:
 
 It is **not intended** for:
 
-- Real-time prediction services
+- Real-time prediction services (not yet)
 - Streaming ingestion pipelines
 - Automated production deployment
 
@@ -106,32 +104,6 @@ This is a **pure univariate forecasting model**:
 7. Evaluate forecast accuracy
 8. Persist trained model locally
 
----
-
-## Project Structure
-
-project_energen/
-│
-├── src/
-│ └── project_energen/
-│ ├── train.py # Model training and evaluation
-│ ├── forecast.py # Forecasting logic
-│ ├── api.py # Local inference API
-│ ├── config.py # Centralized configuration
-│ └── init.py
-│
-├── data/
-│ └── energy.csv # Historical energy data
-│
-├── models/
-│ └── # Trained SARIMA model
-│
-├── Dockerfile
-├── requirements.txt
-└── README.md
-
----
-
 ## Configuration
 
 All configuration values are centralized in `config.py` to ensure clarity and reproducibility.
@@ -144,32 +116,70 @@ Key parameters include:
 - `DATA_DIR` — data directory path
 - `MODEL_DIR` — model persistence path
 
----
-
 ## Getting Started
+
+To replicate this project:
 
 ### Prerequisites
 
-- Python 3.11+
-- pip or poetry
-- pandas
-- statsmodels
-- matplotlib
+- Python 3.11.7
+- poetry (Python package manager)
+- Docker (for containerization)
+- Git
+- Git LFS
 
-### Clone the Repository
+### 1. Install Git LFS
+
+Due to the large nature of the model, you will need to:
 
 ```bash
-git clone <your-repo-url>
+# Install Git LFS (once)
+git lfs install
+```
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/marvellous-amos/project_energen.git
+
 cd project_energen
 ```
 
-**Install Dependencies**
+(optional) If the model file did not download:
 
 ```bash
-pip install -r requirements.txt
+git lfs pull
 ```
 
-**Train the Model**
+### 2. Install Poetry
+
+```bash
+pip install poetry
+
+poetry self add poetry-plugin-shell
+```
+
+### 2. Install Dependencies
+
+```bash
+poetry install
+```
+
+Activate the environment:
+
+```bash
+poetry shell
+```
+
+### 3. Run the Application
+
+```bash
+python app.py
+```
+
+## Train the Model (Optional)
+
+The trianed model exists in the repo under the `models` folder. But if necessary, run the training script to train and evaluate the model:
 
 ```bash
 python src/project_energen/train.py
@@ -177,10 +187,11 @@ python src/project_energen/train.py
 
 **Output:**
 
-- Trained SARIMA model saved to the models/ directory
+- `energen_sarima_auto_model.joblib` - Trained SARIMA model saved to the models/ folder
+- `energen_scaler.joblib` - StandardScaler for feature normalization
 - Forecast evaluation metrics printed to the console
 
-## Running with Docker (Local)
+## Deploying as a Web Service (Docker)
 
 Docker is provided to ensure consistent runtime environments across machines.
 
@@ -258,21 +269,6 @@ Each update requires full re-training with the expanded dataset. This approach i
 - Offline workflows
 - Research and analysis settings
 
-## Model Evaluation
-
-Evaluation is performed using a temporal hold-out test set to avoid data leakage.
-
-Metrics used include:
-
-- Mean Absolute Error (MAE)
-- Root Mean Squared Error (RMSE)
-
-In addition to numerical metrics, visual inspection is used to assess:
-
-- Seasonal pattern capture
-- Bias or systematic error
-- Under- or over-forecasting behavior
-
 ## Visualization
 
 The project includes multiple visual diagnostics:
@@ -314,7 +310,9 @@ Potential extensions include:
 - Automated data ingestion from public energy APIs
 - Batch or REST-based forecasting services
 
-## Tech Stack
+## Development Notes
+
+### Tech Stack
 
 - pandas / numpy — data manipulation
 
@@ -328,9 +326,7 @@ Potential extensions include:
 
 - Python — core language
 
-## Development Notes
-
-Best practices applied throughout the project:
+### Best practices applied throughout the project:
 
 - Time-aware train/test splitting
 
@@ -344,7 +340,7 @@ Best practices applied throughout the project:
 
 - Local reproducibility
 
-## Deployment Status
+### Deployment Status
 
 🚫 Not deployed
 
@@ -352,6 +348,6 @@ This project is intentionally scoped for:
 
 Docker is used only for local execution and reproducibility, not for production hosting.
 
-## Summary
+---
 
-This project demonstrates a classical, statistically grounded approach to energy load forecasting using SARIMA. It prioritizes interpretability, correctness, and real-world time-series considerations over deployment complexity, making it well-suited for research, learning, and offline analytical workflows.
+**Built with ❤️ from Marvel for ML Zoomcamp Midterm Project**
